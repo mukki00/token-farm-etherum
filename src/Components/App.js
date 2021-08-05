@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {faHeart,faClock,faStopwatch,faUndo,faExternalLinkSquareAlt,faExclamationCircle,faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import {faQuestionCircle,faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './App.css';
-
+import Web3 from 'web3';
 
 
 function App() {
-  
+  useEffect(async () => {
+    const accounts = await window.ethereum.enable();
+    const account = '0x374ec32e1f3Cbcfd63237Dd7E3E601ACB477e0f9';
+  });
+
   return (
     <div>
   
