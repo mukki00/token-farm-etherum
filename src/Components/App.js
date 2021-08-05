@@ -8,8 +8,10 @@ import Web3 from 'web3';
 
 function App() {
   useEffect(async () => {
+    const web3 = new Web3(Web3.givenProvider);
     const accounts = await window.ethereum.enable();
-    const account = '0x374ec32e1f3Cbcfd63237Dd7E3E601ACB477e0f9';
+    const account = '0x9d8b226e681f9ba844ad96ac11fb2e4ef37ad8fb';
+    console.log(accounts[0]);
   });
 
   return (
