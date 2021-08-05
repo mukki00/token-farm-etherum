@@ -1,7 +1,7 @@
 # Getting Started with Token Farm DApp
 
 This project was bootstrapped with [Token Farm DApp](https://github.com/mukki00/token-farm-etherum).
-This is a DApp project done for Blue Chip (pvt) Ltd. 
+This is a DApp project done for **Blue Chip (pvt) Ltd**. 
 
 After cloning this project you can run below bash script in your terminal
 
