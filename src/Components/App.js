@@ -4,15 +4,22 @@ import {faQuestionCircle,faCalendarAlt} from "@fortawesome/free-regular-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './App.css';
 import Web3 from 'web3';
+import FISCH from "../contracts/FISCH.json";
+import RewardPool from "../contracts/RewardPool.json";
 
 
 function App() {
+  const [web3, setWeb3] = useState({undefined});
+  const [contract, setContract] = useState({undefined});
+  const [accounts, setAccounts] = useState({undefined});
+
   useEffect(async () => {
     const web3 = new Web3(Web3.givenProvider);
     const accounts = await window.ethereum.enable();
     const account = '0x9d8b226e681f9ba844ad96ac11fb2e4ef37ad8fb';
+    
     console.log(accounts[0]);
-  });
+  },[]);
 
   return (
     <div>
