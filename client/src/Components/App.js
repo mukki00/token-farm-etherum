@@ -3,23 +3,44 @@ import {faHeart,faClock,faStopwatch,faUndo,faExternalLinkSquareAlt,faExclamation
 import {faQuestionCircle,faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './App.css';
-import Web3 from 'web3';
 import FISCH from "../contracts/FISCH.json";
 import RewardPool from "../contracts/RewardPool.json";
-
+import SimpleStorageContract from "../contracts/SimpleStorage.json";
+import getWeb3 from "./getWeb3";
 
 function App() {
   const [web3, setWeb3] = useState({undefined});
-  const [contract, setContract] = useState({undefined});
-  const [accounts, setAccounts] = useState({undefined});
+  const [contract, setContract] = useState([]);
+  const [accounts, setAccounts] = useState([]);
+  const init  = async () => {
+    try{
+      const web3 = await getWeb3();
 
-  useEffect(async () => {
-    const web3 = new Web3(Web3.givenProvider);
-    const accounts = await window.ethereum.enable();
-    const account = '0x9d8b226e681f9ba844ad96ac11fb2e4ef37ad8fb';
-    
-    console.log(accounts[0]);
-  },[]);
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
+
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const instance = new web3.eth.Contract(
+        SimpleStorageContract.abi,
+        deployedNetwork && deployedNetwork.address,
+      );
+
+      // Set web3, accounts, and contract to the state, and then proceed with an
+      // example of interacting with the contract's methods.
+      setWeb3(web3);
+      setContract(instance);
+      setAccounts(accounts);
+      console.log(accounts);
+    }catch(error){
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+      );
+      console.error(error);
+    }
+  }
+  useEffect(init(),[]);
 
   return (
     <div>
